@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Reference template for the Open WebUI memory-backup launchd agent.
+
+  To use:
+    1. Replace USERNAME below with your macOS short username (run: echo $USER).
+    2. Save as ~/Library/LaunchAgents/com.USERNAME.openwebui-backup.plist
+    3. Load it:  launchctl load -w ~/Library/LaunchAgents/com.USERNAME.openwebui-backup.plist
+
+  Assumes backup-memories.sh lives in ~/localllm/ (adjust the paths if not).
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.USERNAME.openwebui-backup</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/USERNAME/localllm/backup-memories.sh</string>
+    </array>
+
+    <!-- Run every day at 03:00. If the Mac is asleep, launchd runs it on next wake. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>3</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/USERNAME/localllm/backups/backup.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/USERNAME/localllm/backups/backup.log</string>
+</dict>
+</plist>

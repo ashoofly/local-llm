@@ -1,0 +1,5 @@
+# Local backups — contain personal data (memories, chats, settings). Never commit.
+backups/
+
+# macOS cruft
+.DS_Store
